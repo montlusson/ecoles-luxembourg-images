@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Test origine parente</title>
+<style>
+body{margin:0;padding:12px;font:15px/1.4 -apple-system,system-ui,sans-serif;background:#fff;color:#14305a}
+h1{font-size:16px;margin:0 0 8px}
+pre{white-space:pre-wrap;word-break:break-all;background:#eef0f5;border-radius:6px;padding:10px;margin:0;font:13px/1.45 ui-monospace,Menlo,monospace}
+</style>
+</head>
+<body>
+<h1>Test : origine de la page parente</h1>
+<pre id="out">Chargement…</pre>
+<script>
+(function () {
+  var r = {};
+  try { r.ancestorOrigins = Array.from(location.ancestorOrigins || []); r.ancestorOriginsDisponible = !!location.ancestorOrigins; } catch (e) { r.ancestorOrigins = "erreur : " + e.message; }
+  r.top = (window.top === window.self);
+  r.href = location.href;
+  r.referrer = document.referrer || "(vide)";
+  try { r.parentHref = window.parent.location.href; } catch (e) { r.parentHref = "inaccessible (normal si autre origine)"; }
+  r.userAgent = navigator.userAgent;
+  document.getElementById("out").textContent = JSON.stringify(r, null, 2);
+})();
+</script>
+</body>
+</html>
